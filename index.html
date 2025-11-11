@@ -2,38 +2,73 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meal Finder</title>
 
+    <!-- Fonts and Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Raleway:wght@300;500&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="./style.css">
+    <script src="https://kit.fontawesome.com/6b8bea1d6f.js" crossorigin="anonymous"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
     <nav class="header">
-
         <div class="logo">
-            <div>
-                <span><i class="fa-solid fa-utensils"></i></span>
+            <div class="icon">
+                <i class="fa-solid fa-utensils"></i>
             </div>
-            <div>
-                <h1>Meal Finder</h1>
-            </div>
-        </div>
-        <div class="hambuger">
-            <span><i class="fa-solid fa-bars"></i></span>
+            <h1>Meal Finder</h1>
         </div>
 
+        <button id="hamburgerBtn" class="hamburger" aria-label="Open menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
     </nav>
-   
 
-    <script src="https://kit.fontawesome.com/6b8bea1d6f.js" crossorigin="anonymous"></script>
+    <section class="hero">
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <div class="search-wrapper">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search recipes here ..." />
+                <button class="search-button" id="searchBtn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+
+            <h2 class="hero-title">What are your favorite cuisines?</h2>
+            <p class="hero-sub">PERSONALIZE YOUR EXPERIENCE</p>
+        </div>
+    </section>
+
+    <aside id="sidePanel" class="side-panel" role="dialog" aria-modal="true" aria-labelledby="panelTitle" hidden>
+        <header class="panel-header">
+            <h2 id="panelTitle">Meal Categories</h2>
+            <button id="closePanelBtn" class="close-btn" aria-label="Close menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </header>
+
+        <main class="panel-body" id="panelBody">
+            <div id="loader" class="loader">Loading...</div>
+            <ul id="categoriesList" class="categories-list" aria-live="polite"></ul>
+            <div id="errorMsg" class="error" role="alert" hidden></div>
+        </main>
+    </aside>
+
+    <div id="overlay" class="overlay" hidden></div>
+
+    <script src="script.js"></script>
+
 </body>
 
 </html>
