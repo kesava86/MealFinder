@@ -6,26 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meal Finder</title>
 
-    <!-- Fonts and Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Raleway:wght@300;500&display=swap"
         rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6b8bea1d6f.js" crossorigin="anonymous" defer></script>
 
-    <script src="https://kit.fontawesome.com/6b8bea1d6f.js" crossorigin="anonymous"></script>
-
-    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
     <nav class="header">
         <div class="logo">
-            <div class="icon">
-                <i class="fa-solid fa-utensils"></i>
-            </div>
+            <div class="icon"><i class="fa-solid fa-utensils"></i></div>
             <h1>Meal Finder</h1>
         </div>
 
@@ -50,25 +44,35 @@
         </div>
     </section>
 
+    <section id="categoriesSection" class="categories-section" aria-labelledby="categoriesHeading">
+        <div class="container">
+            <div class="section-header">
+                <h3 id="categoriesHeading">Categories</h3>
+                <div class="heading-underline" aria-hidden="true"></div>
+            </div>
+
+            <div id="categoriesGrid" class="categories-grid" aria-live="polite">
+            </div>
+
+            <div id="categoriesLoader" class="categories-loader">Loading categories…</div>
+            <div id="categoriesError" class="categories-error" hidden>Failed to load categories.</div>
+        </div>
+    </section>
+
     <aside id="sidePanel" class="side-panel" role="dialog" aria-modal="true" aria-labelledby="panelTitle" hidden>
         <header class="panel-header">
-            <h2 id="panelTitle">Meal Categories</h2>
-            <button id="closePanelBtn" class="close-btn" aria-label="Close menu">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
+            <button id="closePanelBtn" class="close-btn" aria-label="Close menu"><i
+                    class="fa-solid fa-xmark"></i></button>
         </header>
-
-        <main class="panel-body" id="panelBody">
+        <main class="panel-body">
             <div id="loader" class="loader">Loading...</div>
-            <ul id="categoriesList" class="categories-list" aria-live="polite"></ul>
-            <div id="errorMsg" class="error" role="alert" hidden></div>
+            <div id="panelCategories"></div>
         </main>
     </aside>
 
     <div id="overlay" class="overlay" hidden></div>
 
     <script src="script.js"></script>
-
 </body>
 
 </html>
