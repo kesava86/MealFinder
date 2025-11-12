@@ -1,79 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Meal Finder</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Meal Finder</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Raleway:wght@300;500&display=swap"
-        rel="stylesheet">
-    <script src="https://kit.fontawesome.com/6b8bea1d6f.js" crossorigin="anonymous" defer></script>
+  <!-- Fonts & icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Raleway:wght@300;500;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/6b8bea1d6f.js" crossorigin="anonymous" defer></script>
 
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-    <nav class="header">
-        <a href="index.html" class="logo" id="homeLink">
-            <div class="icon"><i class="fa-solid fa-utensils"></i></div>
-            <h1>Meal Finder</h1>
-        </a>
 
-        <button id="hamburgerBtn" class="hamburger" aria-label="Open menu">
-            <i class="fa-solid fa-bars"></i>
+  <nav class="header" role="navigation" aria-label="Top navigation">
+    <a href="index.html" class="logo" id="homeLink" title="Back to home">
+      <div class="icon"><i class="fa-solid fa-utensils"></i></div>
+      <h1>Meal Finder</h1>
+    </a>
+
+    <button id="hamburgerBtn" class="hamburger" aria-label="Open menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content" role="region" aria-label="Search area">
+      <div class="search-wrapper">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search recipes here ..." aria-label="Search recipes" />
+        <button class="search-button" id="searchBtn" aria-label="Search">
+          <i class="fa-solid fa-magnifying-glass"></i>
         </button>
-    </nav>
+      </div>
 
+      <h2 class="hero-title">What are your favorite cuisines?</h2>
+      <p class="hero-sub">PERSONALIZE YOUR EXPERIENCE</p>
+    </div>
+  </section>
 
-    <section class="hero">
-        <div class="hero-overlay"></div>
+  <section id="categoriesSection" class="categories-section" aria-labelledby="categoriesHeading">
+    <div class="container">
+      <div class="section-header">
+        <h3 id="categoriesHeading" class="categories-title">CATEGORIES</h3>
+      </div>
 
-        <div class="hero-content">
-            <div class="search-wrapper">
-                <input type="text" class="search-input" id="searchInput" placeholder="Search recipes here ..." />
-                <button class="search-button" id="searchBtn">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </div>
+      <div id="categoriesGrid" class="categories-grid" aria-live="polite"></div>
+      <div id="categoriesLoader" class="categories-loader">Loading categories…</div>
+      <div id="categoriesError" class="categories-error" hidden>Failed to load categories.</div>
+    </div>
+  </section>
 
-            <h2 class="hero-title">What are your favorite cuisines?</h2>
-            <p class="hero-sub">PERSONALIZE YOUR EXPERIENCE</p>
-        </div>
-    </section>
+  <aside id="sidePanel" class="side-panel" role="dialog" aria-modal="true" aria-labelledby="panelTitle" hidden>
+    <header class="panel-header">
+      <button id="closePanelBtn" class="close-btn" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+    </header>
 
-    <section id="categoriesSection" class="categories-section" aria-labelledby="categoriesHeading">
-        <div class="container">
-            <div class="section-header">
-                <h3 class="categories-title">CATEGORIES</h3>
+    <main class="panel-body" id="panelBody">
+      <div id="loader" class="loader">Loading...</div>
+      <div id="panelCategories" class="panel-categories" aria-live="polite"></div>
+      <div id="panelError" class="error" role="alert" hidden></div>
+    </main>
+  </aside>
 
-            </div>
+  <div id="overlay" class="overlay" hidden></div>
 
-            <div id="categoriesGrid" class="categories-grid" aria-live="polite">
-            </div>
-
-            <div id="categoriesLoader" class="categories-loader">Loading categories…</div>
-            <div id="categoriesError" class="categories-error" hidden>Failed to load categories.</div>
-        </div>
-    </section>
-
-    <aside id="sidePanel" class="side-panel" role="dialog" aria-modal="true" aria-labelledby="panelTitle" hidden>
-        <header class="panel-header">
-            <button id="closePanelBtn" class="close-btn" aria-label="Close menu"><i
-                    class="fa-solid fa-xmark"></i></button>
-        </header>
-        <main class="panel-body">
-            <div id="loader" class="loader">Loading...</div>
-            <div id="panelCategories"></div>
-        </main>
-    </aside>
-
-    <div id="overlay" class="overlay" hidden></div>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
-
 </html>
