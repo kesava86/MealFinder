@@ -28,6 +28,150 @@ document.addEventListener('DOMContentLoaded', () => {
             .replaceAll("'", '&#39;');
     }
 
+
+        function getOrCreateMealsSection() {
+            let sec = document.getElementById('mealsSearchResults');
+            if (sec) return sec;
+
+            sec = document.createElement('section');
+            sec.id = 'mealsSearchResults';
+            sec.className = 'selected-category-section';
+            const hero = document.querySelector('.hero');
+            if (hero && hero.parentNode) hero.parentNode.insertBefore(sec, hero.nextSibling);
+            else document.body.appendChild(sec);
+            return sec;
+        }
+
+        function renderMealsHeader(section) {
+            section.innerHTML = `
+      <div class="detail-box" style="border:none; box-shadow:none; padding:0; margin-bottom:10px"></div>
+      <div class="meals-wrap" style="margin-top:8px;">
+        <div class="meals-header-inline">
+          <h4 class="meals-title" style="margin:0 0 8px 0;">Meals</h4>
+        </div>
+        <div id="mealsContainer" class="meals-grid">
+          <div class="meals-loader">Loading meals…</div>
+        </div>
+      </div>
+    `;
+            const title = section.querySelector('.meals-title');
+            if (title) {
+                title.style.position = 'relative';
+                const hasAfter = getComputedStyle(title, '::after').content !== 'none';
+                if (!hasAfter) {
+                    const underline = document.createElement('div');
+                    underline.style.width = '80px';
+                    underline.style.height = '4px';
+                    underline.style.background = 'orangered';
+                    underline.style.borderRadius = '2px';
+                    underline.style.marginTop = '6px';
+                    title.after(underline);
+                }
+            }
+        }
+
+        function renderMealCards(meals) {
+            const section = document.getElementById('mealsSearchResults');
+            if (!section) return;
+            const container = section.querySelector('#mealsContainer');
+            if (!container) return;
+
+            // Clear loader
+            container.innerHTML = '';
+
+            if (!meals || meals.length === 0) {
+                container.innerHTML = '<div class="meals-empty">No meals found.</div>';
+                return;
+            }
+
+            const grid = document.createElement('div');
+            grid.className = 'meals-cards-grid';
+            // iterate and create cards
+            meals.forEach(m => {
+                const card = document.createElement('div');
+                card.className = 'meal-card';
+                card.innerHTML = `
+        <img src="${escapeHtml(m.strMealThumb)}" alt="${escapeHtml(m.strMeal)}" loading="lazy" />
+        <div class="meal-name">${escapeHtml(m.strMeal)}</div>
+      `;
+                // optional click handler - you can replace with fetching meal details
+                card.addEventListener('click', () => {
+                    // implement meal detail fetching later if you want
+                    alert('Selected meal: ' + m.strMeal);
+                });
+                grid.appendChild(card);
+            });
+
+            container.appendChild(grid);
+        }
+
+        
+        async function fetchMealsForQuery(query) {
+            const section = getOrCreateMealsSection();
+            renderMealsHeader(section);
+
+            const container = section.querySelector('#mealsContainer');
+            container.innerHTML = '<div class="meals-loader">Searching…</div>';
+            // scroll into view
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            const filterURL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${encodeURIComponent(query)}`;
+            try {
+                const res = await fetch(filterURL);
+                if (!res.ok) throw new Error('Network ' + res.status);
+                const json = await res.json();
+                const meals = json.meals || [];
+
+                if (meals.length > 0) {
+                    renderMealCards(meals);
+                    return;
+                }
+                // fallback: try search by meal name
+                const searchURL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(query)}`;
+                const res2 = await fetch(searchURL);
+                if (!res2.ok) throw new Error('Network ' + res2.status);
+                const json2 = await res2.json();
+                const meals2 = json2.meals || [];
+                if (meals2.length > 0) {
+                    // the search.php returns full meal objects; adapt to the card format (strMeal, strMealThumb)
+                    renderMealCards(meals2.map(m => ({ strMeal: m.strMeal, strMealThumb: m.strMealThumb })));
+                    return;
+                }
+
+                // nothing found
+                container.innerHTML = `<div class="meals-empty">No meals found for "${escapeHtml(query)}".</div>`;
+            } catch (err) {
+                console.error(err);
+                container.innerHTML = `<div class="meals-error">Failed to load meals. Try again.</div>`;
+            }
+        }
+
+        const searchBtn = document.getElementById('searchBtn');
+        const searchInput = document.getElementById('searchInput');
+
+        if (searchBtn && searchInput) {
+            searchBtn.addEventListener('click', (ev) => {
+                ev.preventDefault();
+                const q = (searchInput.value || '').trim();
+                if (!q) {
+                    alert('Please enter a dish or category name to search.');
+                    searchInput.focus();
+                    return;
+                }
+                fetchMealsForQuery(q);
+            });
+
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    searchBtn.click();
+                }
+            });
+        } else {
+            console.warn('searchBtn or searchInput not found; add them or adapt the ids.');
+        }
+
+
     function openPanel() {
         if (!sidePanel) return console.warn('No sidePanel found');
         sidePanel.hidden = false;
@@ -66,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const json = await res.json();
             const cats = Array.isArray(json.categories) ? json.categories : [];
 
-            categoriesCache = cats; 
+            categoriesCache = cats;
             if (panelLoader) panelLoader.hidden = true;
 
             if (cats.length === 0) {
@@ -107,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-  
+
     function getOrCreateSelectedSection() {
         let section = document.getElementById('selectedCategorySection');
         if (section) return section;
@@ -125,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderCategorySummary(name, description) {
         const section = getOrCreateSelectedSection();
-        section.innerHTML = ''; 
+        section.innerHTML = '';
 
         const box = document.createElement('div');
         box.className = 'detail-box';
@@ -154,7 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function fetchAndRenderMeals(categoryName, mealsGridEl) {
         if (!mealsGridEl) return;
-        mealsGridEl.innerHTML = ''; 
+        mealsGridEl.innerHTML = '';
         const loaderNode = document.createElement('div');
         loaderNode.className = 'meals-loader';
         loaderNode.textContent = 'Loading meals…';
