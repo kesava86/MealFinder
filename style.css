@@ -376,9 +376,6 @@ html, body {
     text-align: center;
 }
 
-/* ---------------------------
-   Meals listing & cards (search & category results)
-   --------------------------- */
 .selected-category-section {
     padding: 30px 16px 60px;
     background: transparent;
@@ -386,7 +383,6 @@ html, body {
     margin: 0 auto;
 }
 
-/* detail box (category summary) */
 .detail-box {
     border: 2px solid orangered;
     padding: 18px;
@@ -487,16 +483,66 @@ html, body {
     text-align: center;
 }
 
-/* ---------------------------
-   Full Meal Detail section
-   (chip + heading, image left, meta right, ingredients, measurements, instructions)
-   --------------------------- */
+.meal-breadcrumb {
+    width: 100%;
+    background: #d95420;
+    color: #fff;
+    padding: 12px 18px;
+    margin: 0 0 18px 0;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.03);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.6px;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.meal-breadcrumb .crumb-home {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.meal-breadcrumb .crumb-home i {
+    font-size: 16px;
+}
+
 .meal-detail-section {
     max-width: 1100px;
-    margin: 28px auto;
-    padding: 22px;
-    background: transparent;
+    margin: 12px auto 48px;
+    padding: 18px;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 8px 28px rgba(10, 10, 12, 0.04);
+    box-sizing: border-box;
     position: relative;
+}
+
+.meals-header {
+    margin-bottom: 12px;
+}
+
+.meals-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #222;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.meals-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 60px;
+    height: 4px;
+    background: #e9672f;
+    border-radius: 2px;
 }
 
 .meal-detail-top {
@@ -504,7 +550,7 @@ html, body {
     justify-content: space-between;
     align-items: center;
     gap: 12px;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     flex-wrap: wrap;
 }
 
@@ -517,91 +563,53 @@ html, body {
 .chip-icon {
     width: 46px;
     height: 46px;
-    border-radius: 10px;
-    background: orangered;
+    border-radius: 6px;
+    background: #e9672f;
     display: grid;
     place-items: center;
     color: #fff;
     font-size: 18px;
-    box-shadow: 0 8px 18px rgba(15, 15, 20, 0.08);
-}
-
-.meal-title {
-    color: orangered;
-    font-size: 20px;
-    font-weight: 800;
-    margin: 0;
-    position: relative;
-    display: inline-block;
-    padding-bottom: 6px;
-}
-
-.meal-title::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 140px;
-    height: 4px;
-    background: orangered;
-    border-radius: 3px;
-}
-
-
-.meal-details-heading {
-    font-size: 22px;
-    font-weight: 700;
-    color: #222;
-    position: relative;
-    display: inline-block;
-    margin-bottom: 28px;
-}
-
-.meal-details-heading::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -12px;
-    width: 80px;
-    height: 4px;
-    background: orangered;
-    border-radius: 2px;
 }
 
 .meal-detail-grid {
     display: grid;
-    grid-template-columns: 340px 1fr;
-    gap: 20px;
+    grid-template-columns: 46% 1fr;
+    gap: 24px;
     align-items: start;
 }
 
 .meal-detail-image {
-    border-radius: 12px;
+    background: #fff;
+    border-radius: 6px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(15, 15, 20, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 6px 20px rgba(10, 10, 12, 0.04);
 }
 
 .meal-detail-image img {
+    display: block;
     width: 100%;
     height: 100%;
-    aspect-ratio: 4/3;
     object-fit: cover;
-    display: block;
+    aspect-ratio: 4/3;
 }
 
+/* right meta column */
 .meal-meta {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
+/* Meal name (right column) */
 .meta-name {
+    color: #d95224;
     font-size: 20px;
-    font-weight: 700;
-    color: orangered;
-    margin-bottom: 6px;
+    font-weight: 800;
     position: relative;
     display: inline-block;
+    margin: 0;
+    padding-bottom: 6px;
 }
 
 .meta-name::after {
@@ -609,24 +617,25 @@ html, body {
     position: absolute;
     left: 0;
     bottom: -6px;
-    width: 120px;
-    height: 4px;
-    background: orangered;
+    width: 140px;
+    height: 3px;
+    background: #ec7a45;
     border-radius: 3px;
 }
 
+/* meta-sub: category/source/tags */
 .meta-sub {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
+    align-items: center;
     font-size: 13px;
     color: #333;
-    align-items: center;
 }
 
 .meta-item {
-    color: #444;
-    font-weight: 600;
+    font-weight: 700;
+    color: #111;
     font-size: 13px;
 }
 
@@ -638,61 +647,83 @@ html, body {
 }
 
 .tag-box {
-    border: 1.5px solid orangered;
-    color: orangered;
+    border: 1.5px solid #f09a78;
+    color: #d95224;
+    background: rgba(236, 122, 69, 0.04);
     padding: 6px 10px;
-    border-radius: 18px;
+    border-radius: 5px;
     font-weight: 600;
-    font-size: 12px;
-    background: rgba(255, 107, 43, 0.03);
+    font-size: 13px;
+}
+
+.ingredients-panel {
+    background: #e76a39;
+    color: #fff;
+    padding: 16px;
+    border-radius: 6px;
+    margin-top: 6px;
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.03);
 }
 
 .ingredients-heading {
-    margin-top: 8px;
     font-size: 16px;
-    font-weight: 700;
-    color: #222;
+    font-weight: 800;
+    margin-bottom: 10px;
 }
 
 .ingredients-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px 24px;
-    margin-top: 10px;
+    gap: 10px 18px;
+    align-items: center;
 }
 
 .ingredient-item {
     display: flex;
-    gap: 10px;
     align-items: center;
+    gap: 10px;
 }
 
 .num-badge {
-    min-width: 30px;
-    min-height: 30px;
+    min-width: 20px;
+    min-height: 20px;
     border-radius: 50%;
-    background: #2ecc71;
-    color: white;
+    background: #16a085;
+    color: #fff;
     display: grid;
     place-items: center;
     font-weight: 700;
     font-size: 13px;
-    flex-shrink: 0;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
 }
 
 .ingredient-text {
+    color: #fff;
+    font-weight: 600;
     font-size: 14px;
-    color: #333;
 }
 
 .measurements-box {
-    margin-top: 14px;
-    border: 1px dashed #ddd;
-    padding: 12px;
-    border-radius: 10px;
     background: #fff;
-    font-size: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 14px;
+    margin-top: 18px;
+    border-radius: 6px;
+    box-shadow: 0 6px 14px rgba(10, 10, 12, 0.03);
+}
+
+.measurements-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
     color: #333;
+    font-size: 14px;
+}
+
+.measure-item {
+    display: flex;
+    gap: 8px;
+    align-items: center;
 }
 
 .instructions {
@@ -717,16 +748,53 @@ html, body {
     line-height: 1.45;
 }
 
-#closeMealDetailBtn {
-    position: absolute;
-    right: 18px;
-    top: 8px;
-    background: transparent;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    color: #555;
+
+@media (max-width: 980px) {
+    .meal-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ingredients-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .measurements-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .meta-name::after {
+        width: 80px;
+    }
 }
+
+@media (max-width: 520px) {
+    .meal-breadcrumb {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    .chip-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .num-badge {
+        min-width: 24px;
+        min-height: 24px;
+        font-size: 12px;
+    }
+
+    .meta-name {
+        font-size: 18px;
+    }
+
+    .meal-detail-section {
+        padding: 12px;
+        margin: 10px;
+    }
+}
+
 
 
 @media (max-width: 900px) {

@@ -405,81 +405,116 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function renderMealDetailSection(meal) {
-    // remove any listing sections to declutter
-    hideMealsListings();
+function renderMealDetailSection(meal) {
+  hideMealsListings();
 
-    const hero = document.querySelector('.hero');
-    let section = document.getElementById('mealDetailSection');
-    if (!section) {
-      section = document.createElement('section');
-      section.id = 'mealDetailSection';
-      section.className = 'meal-detail-section';
-      if (hero && hero.parentNode) hero.parentNode.insertBefore(section, hero.nextSibling);
-      else document.body.appendChild(section);
-    }
+  const hero = document.querySelector('.hero');
+  let section = document.getElementById('mealDetailSection');
+  if (!section) {
+    section = document.createElement('section');
+    section.id = 'mealDetailSection';
+    section.className = 'meal-detail-section';
+    if (hero && hero.parentNode) hero.parentNode.insertBefore(section, hero.nextSibling);
+    else document.body.appendChild(section);
+  }
 
-    const ingredients = [];
-    for (let i = 1; i <= 20; i++) {
-      const ing = meal[`strIngredient${i}`];
-      const measure = meal[`strMeasure${i}`] || '';
-      if (ing && ing.trim()) ingredients.push({ ing: ing.trim(), measure: measure.trim() });
-    }
+  const ingredients = [];
+  for (let i = 1; i <= 20; i++) {
+    const ing = meal[`strIngredient${i}`];
+    const measure = meal[`strMeasure${i}`] || '';
+    if (ing && ing.trim()) ingredients.push({ ing: ing.trim(), measure: measure.trim() });
+  }
 
-    const tags = (meal.strTags || '').split(',').map(t => t.trim()).filter(Boolean);
-    const measurements = ingredients.map(it => it.measure).filter(Boolean);
-    const rawInstr = meal.strInstructions || '';
-    const instParts = rawInstr.split(/\r?\n|\.\s+/).map(s => s.trim()).filter(Boolean);
+  const tags = (meal.strTags || '').split(',').map(t => t.trim()).filter(Boolean);
+  const measurements = ingredients.map(it => it.measure).filter(Boolean);
 
-    section.innerHTML = `
-     
+  const rawInstr = meal.strInstructions || '';
+  const instParts = rawInstr
+    .split(/\r?\n|\.\s+/)
+    .map(s => s.trim())
+    .filter(Boolean);
 
-      <div class="meal-detail-top">
-        <div class="meal-chip">
-          <div class="chip-icon"><i class="fa-solid fa-house"></i></div>
-          <div class="meal-title-block">
-            <div class="meal-title">${escapeHtml(meal.strMeal)}</div>
+  // Ingredients HTML (two-column grid inside orange panel)
+  const ingredientsHtml = `
+    <div class="ingredients-panel" aria-labelledby="ingredientsHeading">
+      <div class="ingredients-heading" id="ingredientsHeading">Ingredients</div>
+      <div class="ingredients-grid">
+        ${ingredients.map((it, idx) => `
+          <div class="ingredient-item">
+            <div class="num-badge">${idx + 1}</div>
+            <div class="ingredient-text">${escapeHtml(it.ing)}</div>
           </div>
-        </div>
-        <div class="meal-details-heading">MEAL DETAILS</div>
+        `).join('')}
       </div>
+    </div>
+  `;
 
-      <div class="meal-detail-grid">
-        <div class="meal-detail-image">
+  const measurementsHtml = `
+    <div class="measurements-box" aria-labelledby="measureHeading">
+      <div style="font-weight:700; margin-bottom:8px;" id="measureHeading">Measure:</div>
+      <div class="measurements-grid">
+        ${measurements.length
+          ? measurements.map(m => `<div class="measure-item">🔸 ${escapeHtml(m)}</div>`).join('')
+          : `<div>No measurement data.</div>`}
+      </div>
+    </div>
+  `;
+
+  section.innerHTML = `
+    <!-- breadcrumb bar -->
+    <div class="meal-breadcrumb" role="navigation" aria-label="Breadcrumb">
+      <div class="crumb-home"><i class="fa-solid fa-house"></i></div>
+      <div style="opacity:.95; margin-left:10px; font-weight:700;">${escapeHtml(meal.strMeal)}</div>
+    </div>
+
+    <!-- MEAL DETAILS heading with underline -->
+    <div style="height:14px;"></div>
+    <div class="meals-header" style="padding-left:4px;">
+      <h3 class="meals-title" style="margin:0;">MEAL DETAILS</h3>
+    </div>
+
+    <!-- card container: includes close button -->
+    <div style="position:relative; background:transparent; padding-top:8px;">
+      
+
+      <!-- main grid: left image, right meta + ingredients panel -->
+      <div class="meal-detail-grid" style="margin-top:12px;">
+        <!-- left: big image -->
+        <div class="meal-detail-image" aria-hidden="true">
           <img src="${escapeHtml(meal.strMealThumb)}" alt="${escapeHtml(meal.strMeal)}" />
         </div>
 
-        <div class="meal-meta">
+        <!-- right: meta + tags + ingredients (orange panel) -->
+        <div class="meal-meta" role="region" aria-label="Meal metadata">
           <div class="meta-name">${escapeHtml(meal.strMeal)}</div>
 
-          <div class="meta-sub">
-            <div class="meta-item"><strong>Category:</strong>&nbsp; ${escapeHtml(meal.strCategory || '—')}</div>
+          <div class="meta-sub" style="margin-top:6px;">
+            <div class="meta-item"><strong>CATEGORY:</strong>&nbsp; ${escapeHtml(meal.strCategory || '—')}</div>
             ${meal.strSource ? `<div class="meta-item"><strong>Source:</strong>&nbsp;<a href="${escapeHtml(meal.strSource)}" target="_blank" rel="noopener">${escapeHtml(meal.strSource)}</a></div>` : ''}
-            <div class="meta-tags">${tags.map(t => `<span class="tag-box">${escapeHtml(t)}</span>`).join('')}</div>
           </div>
 
-          <div>
-            <div class="ingredients-heading">Ingredients</div>
-            <div class="ingredients-grid">
-              ${ingredients.map((it, idx) => `
-                <div class="ingredient-item">
-                  <div class="num-badge">${idx + 1}</div>
-                  <div class="ingredient-text">${escapeHtml(it.ing)}</div>
-                </div>
-              `).join('')}
+          <div style="margin-top:8px;">
+            <div style="font-weight:700; font-size:13px; color:#333; margin-bottom:8px;">Tags:</div>
+            <div class="meta-tags">
+              ${tags.length ? tags.map(t => `<span class="tag-box">${escapeHtml(t)}</span>`).join('') : '<span style="color:#666">No tags</span>'}
             </div>
           </div>
 
-          <div class="measurements-box">
-            <strong>Measurements</strong>
-            <div style="margin-top:8px;">
-              ${measurements.length ? measurements.map(m => `<div>${escapeHtml(m)}</div>`).join('') : '<div>No measurement data.</div>'}
-            </div>
-          </div>
+          <!-- add a little spacer -->
+          <div style="height:12px;"></div>
+
+          <!-- Ingredients orange panel placed inside right column -->
+          ${ingredientsHtml}
         </div>
+      </div> <!-- /.meal-detail-grid -->
+
+      <!-- full-width Measurements box under the grid -->
+      <div style="margin-top:20px;">
+        ${measurementsHtml}
       </div>
 
-      <div class="instructions">
+      <!-- Instructions -->
+      <div class="instructions" style="margin-top:18px;" aria-label="Instructions">
         <h4 style="margin:12px 0 8px 0; font-size:16px; font-weight:700;">Instructions</h4>
         ${instParts.map(p => `
           <div class="inst-item">
@@ -488,12 +523,15 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         `).join('')}
       </div>
-    `;
+    </div>
+  `;
 
-    
 
-    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+
+  section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
   window.showMealDetails = showMealDetails;
   window._showCategoryDetails = (n) => showCategoryDetails(n);
 });
+  
