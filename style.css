@@ -703,6 +703,28 @@ html, body {
     font-size: 14px;
 }
 
+.measurements-box {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 14px;
+    margin-top: 18px;
+    border-radius: 6px;
+    box-shadow: 0 6px 14px rgba(10, 10, 12, 0.03);
+}
+
+.measurements-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+    color: #333;
+    font-size: 14px;
+}
+
+.measure-item {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
 
 .instructions {
     margin-top: 16px;
