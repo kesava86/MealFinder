@@ -485,7 +485,7 @@ html, body {
 
 .meal-breadcrumb {
     width: 100%;
-    background: #d95420;
+    background: #e9672f;
     color: #fff;
     padding: 12px 18px;
     margin: 0 0 18px 0;
@@ -514,9 +514,7 @@ html, body {
     max-width: 1100px;
     margin: 12px auto 48px;
     padding: 18px;
-    background: #fff;
     border-radius: 6px;
-    box-shadow: 0 8px 28px rgba(10, 10, 12, 0.04);
     box-sizing: border-box;
     position: relative;
 }
@@ -641,7 +639,7 @@ html, body {
 
 .meta-tags {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     flex-wrap: wrap;
     align-items: center;
 }
@@ -786,6 +784,144 @@ html, body {
 /* --- Content Card --- */
 .meal-detail-card {
   margin-top: 25px;      /* ← space between heading and card */
+}
+
+
+
+
+/* --------------------- */
+/* 1. BREADCRUMB BAR     */
+/* --------------------- */
+.meal-breadcrumb {
+  background: #e9672f;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.crumb-text {
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+/* --------------------- */
+/* 2. MEAL DETAILS HEADING */
+/* --------------------- */
+.meal-heading-wrapper {
+  margin-top: 28px;
+  margin-bottom: 14px;
+}
+
+.meal-heading-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #222;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 6px;
+}
+
+.meal-heading-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 80px;
+  height: 4px;
+  background: #e9672f;
+  border-radius: 3px;
+}
+
+/* --------------------- */
+/* 3. CONTENT CARD BELOW */
+/* --------------------- */
+.meal-detail-card {
+  margin-top: 25px;
+}
+
+/* GRID */
+.meal-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.meal-detail-image img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* META */
+.meta-name {
+  font-size: 22px;
+  font-weight: 700;
+  color: #e9672f;
+  position: relative;
+  padding-bottom: 6px;
+}
+
+.meta-name::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 70px;
+  height: 3px;
+  bottom: -6px;
+  background: #e9672f;
+  border-radius: 2px;
+}
+
+.tags-area {
+  margin-top: 12px;
+}
+
+.tag-box {
+  padding: 4px 10px;
+  background: #fff;
+  border: 1px solid #e9672f;
+  border-radius: 6px;
+  margin-right: 6px;
+  font-size: 12px;
+}
+
+/* INSTRUCTIONS */
+.inst-title {
+  margin-top: 20px;
+  font-weight: 700;
+}
+
+.inst-item {
+  display: flex;
+  gap: 10px;
+  margin: 6px 0;
+}
+
+.inst-icon {
+  color: #e9672f;
+  margin-top: 4px;
+}
+
+/* Remove background for breadcrumb */
+.meal-breadcrumb {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove background for meal details heading */
+.meal-details-heading-block {
+  border: none !important;
+  box-shadow: none !important;
+}
+.meal-detail-card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+  margin-top: 25px;
 }
 
 
