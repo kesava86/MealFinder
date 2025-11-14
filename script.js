@@ -460,71 +460,84 @@ function renderMealDetailSection(meal) {
     </div>
   `;
 
-  section.innerHTML = `
-    <!-- breadcrumb bar -->
-    <div class="meal-breadcrumb" role="navigation" aria-label="Breadcrumb">
-      <div class="crumb-home"><i class="fa-solid fa-house"></i></div>
-      <div style="opacity:.95; margin-left:10px; font-weight:700;">${escapeHtml(meal.strMeal)}</div>
-    </div>
+ section.innerHTML = `
+  <!-- 🔶 BREADCRUMB BAR -->
+  <div class="meal-breadcrumb" role="navigation" aria-label="Breadcrumb">
+    <div class="crumb-home"><i class="fa-solid fa-house"></i></div>
+    <div class="crumb-item">${escapeHtml(meal.strMeal)}</div>
+  </div>
 
-    <!-- MEAL DETAILS heading with underline -->
-    <div style="height:14px;"></div>
-    <div class="meals-header" style="padding-left:4px;">
-      <h3 class="meals-title" style="margin:0;">MEAL DETAILS</h3>
-    </div>
+  <!-- 🔶 TOP HEADING: MEAL DETAILS -->
+  <div class="meal-details-heading-block">
+    <h3 class="meal-details-heading-title">MEAL DETAILS</h3>
+  </div>
 
-    <!-- card container: includes close button -->
-    <div style="position:relative; background:transparent; padding-top:8px;">
+  <!-- 🔶 CONTENT CARD (separate from headings) -->
+  <div class="meal-detail-card">
+
+    <!-- grid: left image, right meta -->
+    <div class="meal-detail-grid">
       
-
-      <!-- main grid: left image, right meta + ingredients panel -->
-      <div class="meal-detail-grid" style="margin-top:12px;">
-        <!-- left: big image -->
-        <div class="meal-detail-image" aria-hidden="true">
-          <img src="${escapeHtml(meal.strMealThumb)}" alt="${escapeHtml(meal.strMeal)}" />
-        </div>
-
-        <!-- right: meta + tags + ingredients (orange panel) -->
-        <div class="meal-meta" role="region" aria-label="Meal metadata">
-          <div class="meta-name">${escapeHtml(meal.strMeal)}</div>
-
-          <div class="meta-sub" style="margin-top:6px;">
-            <div class="meta-item"><strong>CATEGORY:</strong>&nbsp; ${escapeHtml(meal.strCategory || '—')}</div>
-            ${meal.strSource ? `<div class="meta-item"><strong>Source:</strong>&nbsp;<a href="${escapeHtml(meal.strSource)}" target="_blank" rel="noopener">${escapeHtml(meal.strSource)}</a></div>` : ''}
-          </div>
-
-          <div style="margin-top:8px;">
-            <div style="font-weight:700; font-size:13px; color:#333; margin-bottom:8px;">Tags:</div>
-            <div class="meta-tags">
-              ${tags.length ? tags.map(t => `<span class="tag-box">${escapeHtml(t)}</span>`).join('') : '<span style="color:#666">No tags</span>'}
-            </div>
-          </div>
-
-          <!-- add a little spacer -->
-          <div style="height:12px;"></div>
-
-          <!-- Ingredients orange panel placed inside right column -->
-          ${ingredientsHtml}
-        </div>
-      </div> <!-- /.meal-detail-grid -->
-
-      <!-- full-width Measurements box under the grid -->
-      <div style="margin-top:20px;">
-        ${measurementsHtml}
+      <!-- LEFT IMAGE -->
+      <div class="meal-detail-image">
+        <img src="${escapeHtml(meal.strMealThumb)}" alt="${escapeHtml(meal.strMeal)}" />
       </div>
 
-      <!-- Instructions -->
-      <div class="instructions" style="margin-top:18px;" aria-label="Instructions">
-        <h4 style="margin:12px 0 8px 0; font-size:16px; font-weight:700;">Instructions</h4>
-        ${instParts.map(p => `
+      <!-- RIGHT INFO -->
+      <div class="meal-meta">
+
+        <!-- TITLE -->
+        <div class="meta-name">${escapeHtml(meal.strMeal)}</div>
+
+        <!-- CATEGORY + SOURCE -->
+        <div class="meta-sub">
+          <div class="meta-item"><strong>CATEGORY:</strong>&nbsp; ${escapeHtml(meal.strCategory || '—')}</div>
+          ${
+            meal.strSource
+              ? `<div class="meta-item"><strong>Source:</strong>&nbsp;<a href="${escapeHtml(meal.strSource)}" target="_blank">${escapeHtml(meal.strSource)}</a></div>`
+              : ''
+          }
+        </div>
+
+        <!-- TAGS -->
+        <div class="meta-tags-wrapper">
+          <div class="meta-tag-label">Tags:</div>
+          <div class="meta-tags">
+            ${
+              tags.length
+                ? tags.map(t => `<span class="tag-box">${escapeHtml(t)}</span>`).join('')
+                : '<span class="no-tags">No tags</span>'
+            }
+          </div>
+        </div>
+
+        <!-- INGREDIENTS PANEL -->
+        ${ingredientsHtml}
+
+      </div> <!-- /meal-meta -->
+    </div> <!-- /meal-detail-grid -->
+
+    <!-- MEASUREMENTS FULL WIDTH -->
+    <div class="measurements-section">
+      ${measurementsHtml}
+    </div>
+
+    <!-- INSTRUCTIONS -->
+    <div class="instructions">
+      <h4 class="inst-title">Instructions</h4>
+      ${
+        instParts.map(p => `
           <div class="inst-item">
             <div class="inst-icon"><i class="fa-solid fa-square-check"></i></div>
             <div class="inst-text">${escapeHtml(p)}</div>
           </div>
-        `).join('')}
-      </div>
+        `).join('')
+      }
     </div>
-  `;
+
+  </div> <!-- /meal-detail-card -->
+`;
+
 
 
 
