@@ -464,7 +464,7 @@ section.innerHTML = `
 
   <div class="meal-breadcrumb">
     <i class="fa-solid fa-house"></i>
-    <span class="crumb-text">${escapeHtml(meal.strMeal)}</span>
+    <span class="crumb-text">>>> ${escapeHtml(meal.strMeal)}</span>
   </div>
 
   <div class="meal-heading-wrapper">

@@ -316,7 +316,7 @@ html, body {
 
 .categories-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 18px;
     align-items: stretch;
 }
@@ -981,7 +981,7 @@ html, body {
     }
 
     .meal-card img {
-        height: 180px;
+        height: 200px;
     }
 }
 
@@ -991,7 +991,7 @@ html, body {
     }
 
     .hero-title {
-        font-size: 22px;
+        font-size: 20px;
     }
 
     .section-header h3 {
@@ -1015,7 +1015,7 @@ html, body {
     }
 
     .meal-card img {
-        height: 160px;
+        height: 220px;
     }
 
     .chip-icon {
