@@ -462,21 +462,17 @@ function renderMealDetailSection(meal) {
 
 section.innerHTML = `
 
-  <!-- 🔶 1. BREADCRUMB BAR -->
   <div class="meal-breadcrumb">
     <i class="fa-solid fa-house"></i>
     <span class="crumb-text">${escapeHtml(meal.strMeal)}</span>
   </div>
 
-  <!-- 🔶 2. MEAL DETAILS HEADING -->
   <div class="meal-heading-wrapper">
     <h2 class="meal-heading-title">MEAL DETAILS</h2>
   </div>
 
-  <!-- 🔶 3. CONTENT CARD -->
   <div class="meal-detail-card">
 
-    <!-- Grid -->
     <div class="meal-detail-grid">
 
       <!-- LEFT IMAGE -->
@@ -484,7 +480,6 @@ section.innerHTML = `
         <img src="${escapeHtml(meal.strMealThumb)}" alt="${escapeHtml(meal.strMeal)}">
       </div>
 
-      <!-- RIGHT DETAILS -->
       <div class="meal-meta">
         <div class="meta-name">${escapeHtml(meal.strMeal)}</div>
 
@@ -497,7 +492,6 @@ section.innerHTML = `
           }
         </div>
 
-        <!-- TAGS -->
         <div class="tags-area">
           <strong>Tags:</strong>
           <div class="meta-tags">
@@ -518,7 +512,6 @@ section.innerHTML = `
     <!-- MEASUREMENTS BELOW -->
     ${measurementsHtml}
 
-    <!-- INSTRUCTIONS -->
     <div class="instructions">
       <h3 class="inst-title">Instructions</h3>
       ${instParts.map(step => `

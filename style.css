@@ -408,7 +408,6 @@ html, body {
     text-overflow: ellipsis;
 }
 
-/* meals heading with underline below text */
 .meals-header {
     text-align: left;
     margin-bottom: 18px;
@@ -435,7 +434,6 @@ html, body {
     border-radius: 2px;
 }
 
-/* meals container */
 .meals-grid {
     margin-top: 6px;
 }
@@ -446,7 +444,6 @@ html, body {
     gap: 16px;
 }
 
-/* meal card */
 .meal-card {
     background: #fff;
     border-radius: 10px;
@@ -592,14 +589,12 @@ html, body {
     aspect-ratio: 4/3;
 }
 
-/* right meta column */
 .meal-meta {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-/* Meal name (right column) */
 .meta-name {
     color: #d95224;
     font-size: 20px;
@@ -621,7 +616,6 @@ html, body {
     border-radius: 3px;
 }
 
-/* meta-sub: category/source/tags */
 .meta-sub {
     display: flex;
     gap: 12px;
@@ -746,7 +740,6 @@ html, body {
     line-height: 1.45;
 }
 
-/* --- Breadcrumb --- */
 .crumb-item {
   opacity: .95;
   margin-left: 10px;
@@ -754,7 +747,6 @@ html, body {
   font-size: 14px;
 }
 
-/* --- Meal Details Heading Block --- */
 .meal-details-heading-block {
   margin-top: 18px;
   margin-bottom: 10px;
@@ -781,17 +773,11 @@ html, body {
   border-radius: 3px;
 }
 
-/* --- Content Card --- */
 .meal-detail-card {
-  margin-top: 25px;      /* ← space between heading and card */
+  margin-top: 25px;      
 }
 
 
-
-
-/* --------------------- */
-/* 1. BREADCRUMB BAR     */
-/* --------------------- */
 .meal-breadcrumb {
   background: #e9672f;
   padding: 10px 18px;
@@ -808,9 +794,6 @@ html, body {
   letter-spacing: .5px;
 }
 
-/* --------------------- */
-/* 2. MEAL DETAILS HEADING */
-/* --------------------- */
 .meal-heading-wrapper {
   margin-top: 28px;
   margin-bottom: 14px;
@@ -836,14 +819,10 @@ html, body {
   border-radius: 3px;
 }
 
-/* --------------------- */
-/* 3. CONTENT CARD BELOW */
-/* --------------------- */
 .meal-detail-card {
   margin-top: 25px;
 }
 
-/* GRID */
 .meal-detail-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -855,7 +834,6 @@ html, body {
   border-radius: 10px;
 }
 
-/* META */
 .meta-name {
   font-size: 22px;
   font-weight: 700;
@@ -888,7 +866,6 @@ html, body {
   font-size: 12px;
 }
 
-/* INSTRUCTIONS */
 .inst-title {
   margin-top: 20px;
   font-weight: 700;
@@ -905,13 +882,11 @@ html, body {
   margin-top: 4px;
 }
 
-/* Remove background for breadcrumb */
 .meal-breadcrumb {
   border: none !important;
   box-shadow: none !important;
 }
 
-/* Remove background for meal details heading */
 .meal-details-heading-block {
   border: none !important;
   box-shadow: none !important;
